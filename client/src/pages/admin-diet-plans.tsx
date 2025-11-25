@@ -693,16 +693,32 @@ export default function AdminDietPlans() {
                                 <Badge variant={plan.clientId?.status === 'active' ? 'default' : 'outline'}>
                                   {plan.clientId?.status || "Active"}
                                 </Badge>
-                                {isAdmin && assignMode === 'reassign' && (
-                                  <Button 
-                                    variant="outline" 
-                                    size="sm"
-                                    onClick={() => handleAssign(plan)}
-                                    data-testid="button-reassign"
-                                  >
-                                    <Users className="h-3 w-3 mr-1" />
-                                    Reassign
-                                  </Button>
+                                {isAdmin && (
+                                  <>
+                                    <Button 
+                                      variant="outline" 
+                                      size="sm"
+                                      onClick={() => {
+                                        setSelectedPlan(plan);
+                                        setCreatePlanOpen(true);
+                                      }}
+                                      data-testid="button-edit-assignment"
+                                    >
+                                      <Edit className="h-3 w-3 mr-1" />
+                                      Edit
+                                    </Button>
+                                    {assignMode === 'reassign' && (
+                                      <Button 
+                                        variant="outline" 
+                                        size="sm"
+                                        onClick={() => handleAssign(plan)}
+                                        data-testid="button-reassign"
+                                      >
+                                        <Users className="h-3 w-3 mr-1" />
+                                        Reassign
+                                      </Button>
+                                    )}
+                                  </>
                                 )}
                               </div>
                             </div>
