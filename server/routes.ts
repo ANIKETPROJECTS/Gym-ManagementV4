@@ -2751,13 +2751,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "User not found" });
       }
       
+      console.log(`[Diet Plans API] User: ${user.email}, Role: ${user.role}, ClientId: ${user.clientId}`);
+      
+      // Extract clientId from user - clientId might be populated as full object, so extract _id if needed
+      let clientId = typeof user.clientId === 'object' && user.clientId?._id 
+        ? user.clientId._id.toString()
+        : user.clientId?.toString();
+      
       // Clients get their assigned plans, admins/trainers get all plans
-      if (user.role === 'client') {
-        // clientId might be populated as full object, so extract _id if needed
-        let clientId = typeof user.clientId === 'object' && user.clientId?._id 
-          ? user.clientId._id.toString()
-          : user.clientId?.toString();
-        
+      // Check if user has a clientId first - if they do, treat as client even if role isn't exactly 'client'
+      if (clientId) {
         // If user doesn't have clientId, find the Client by email and UPDATE the user record
         if (!clientId && user.email) {
           console.log(`[Diet Plans] User ${user.email} missing clientId, looking up by email...`);
@@ -2775,14 +2778,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
           return res.json([]);
         }
         
+        console.log(`[Diet Plans] User has clientId ${clientId}, fetching assigned plans for this client`);
         const plans = await storage.getClientDietPlans(clientId);
-        console.log(`[Diet Plans] Retrieved ${plans.length} diet plans for client ${clientId}`);
+        console.log(`[Diet Plans] Retrieved ${plans.length} diet plans for client ${clientId}. Plans: ${plans.map((p: any) => p._id).join(', ')}`);
         return res.json(plans);
       } else if (user.role === 'admin' || user.role === 'trainer') {
         const plans = await storage.getAllDietPlansWithAssignments();
+        console.log(`[Diet Plans] Admin/Trainer (no clientId): returning ${plans.length} all plans`);
         return res.json(plans);
       } else {
-        return res.status(403).json({ message: "Unauthorized to access diet plans" });
+        console.warn(`[Diet Plans] User ${user.email} has no clientId and is not admin/trainer (role: ${user.role})`);
+        return res.json([]);
       }
     } catch (error: any) {
       console.error(`[Diet Plans] Error:`, error);
