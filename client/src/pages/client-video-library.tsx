@@ -55,11 +55,6 @@ export default function ClientVideoLibrary() {
     enabled: !!clientId,
   });
 
-  const { data: bookmarkedVideos = [], isLoading: bookmarksLoading } = useQuery<Video[]>({
-    queryKey: ['/api/clients', clientId, 'bookmarks'],
-    enabled: !!clientId,
-  });
-
   const { data: bookmarks = [] } = useQuery<any[]>({
     queryKey: [`/api/clients/${clientId}/bookmarks`],
     enabled: !!clientId,
@@ -78,15 +73,14 @@ export default function ClientVideoLibrary() {
     },
   });
 
+  const bookmarkedVideos = bookmarks.map((b: any) => b.video).filter(Boolean);
+
   const isVideoBookmarked = (videoId: string) => {
-    const result = bookmarks.some(b => b.videoId === videoId);
-    console.log("isVideoBookmarked called for", videoId, "result:", result, "bookmarks:", bookmarks);
-    return result;
+    return bookmarks.some((b: any) => b.videoId === videoId);
   };
 
   const handleToggleBookmark = (videoId: string) => {
     const isBookmarked = isVideoBookmarked(videoId);
-    console.log("handleToggleBookmark called for", videoId, "isBookmarked:", isBookmarked);
     bookmarkMutation.mutate({ videoId, isBookmarked });
   };
 
@@ -184,14 +178,14 @@ export default function ClientVideoLibrary() {
           </div>
 
           {/* Loading State */}
-          {(isLoading || bookmarksLoading) && (
+          {isLoading && (
             <div className="flex items-center justify-center py-12">
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
           )}
 
           {/* Empty State */}
-          {!(isLoading || bookmarksLoading) && filteredVideos.length === 0 && (
+          {!isLoading && filteredVideos.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">
                 {viewingBookmarks
@@ -204,7 +198,7 @@ export default function ClientVideoLibrary() {
           )}
 
           {/* Videos Grid */}
-          {!(isLoading || bookmarksLoading) && filteredVideos.length > 0 && (
+          {!isLoading && filteredVideos.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredVideos.map((video) => {
                 const isBookmarked = isVideoBookmarked(video._id);
