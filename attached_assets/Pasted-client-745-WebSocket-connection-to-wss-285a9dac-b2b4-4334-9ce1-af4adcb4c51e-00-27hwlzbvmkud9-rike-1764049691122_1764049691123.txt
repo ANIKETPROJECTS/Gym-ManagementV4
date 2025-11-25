@@ -1,0 +1,139 @@
+client:745 WebSocket connection to 'wss://285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/?token=mAUzFiigOxgS' failed: 
+createConnection @ client:745
+chunk-E22KYI7D.js?v=c51c7109:21609 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+client-video-library.tsx:41 ClientVideoLibrary rendered, viewingBookmarks: false
+client:755 WebSocket connection to 'wss://localhost:5173/?token=mAUzFiigOxgS' failed: 
+createConnection @ client:755
+client:765 [vite] failed to connect to websocket.
+your current setup:
+  (browser) 285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/ <--[HTTP]--> localhost:5173/ (server)
+  (browser) 285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev:/ <--[WebSocket (failing)]--> localhost:5173/ (server)
+Check out your Vite / network configuration and https://vite.dev/config/server-options.html#server-hmr .
+connect @ client:765
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96a isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96c isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff96e isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff970 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff972 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff974 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff976 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171671623eca97974ff978 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7032 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7033 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7031 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7034 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7035 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 692541bf7b3b84bc72018af3 isBookmarked: false
+maxresdefault.jpg:1  Failed to load resource: the server responded with a status of 404 ()
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96a isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96c isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff96e isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff970 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff972 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff974 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff976 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171671623eca97974ff978 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7032 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7033 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7031 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7034 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7035 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 692541bf7b3b84bc72018af3 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96a isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96c isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff96e isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff970 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff972 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff974 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff976 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171671623eca97974ff978 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7032 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7033 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7031 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7034 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7035 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 692541bf7b3b84bc72018af3 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96a isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96c isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff96e isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff970 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff972 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff974 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff976 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171671623eca97974ff978 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7032 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7033 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7031 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7034 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7035 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 692541bf7b3b84bc72018af3 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96a isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96c isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff96e isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff970 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff972 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff974 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff976 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171671623eca97974ff978 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7032 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7033 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7031 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7034 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7035 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 692541bf7b3b84bc72018af3 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96a isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96c isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff96e isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff970 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff972 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff974 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff976 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171671623eca97974ff978 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7032 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7033 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7031 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7034 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7035 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 692541bf7b3b84bc72018af3 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96a isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96c isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff96e isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff970 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff972 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff974 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff976 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171671623eca97974ff978 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7032 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7033 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7031 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7034 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7035 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 692541bf7b3b84bc72018af3 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96a isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96c isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff96e isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff970 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff972 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff974 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff976 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171671623eca97974ff978 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7032 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7033 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7031 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7034 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7035 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 692541bf7b3b84bc72018af3 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96a isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 6917166f623eca97974ff96c isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff96e isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff970 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff972 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff974 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171670623eca97974ff976 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 69171671623eca97974ff978 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7032 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7033 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7031 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7034 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 691ae83551edded80f9e7035 isBookmarked: false
+client-video-library.tsx:205 Rendering video card for 692541bf7b3b84bc72018af3 isBookmarked: false

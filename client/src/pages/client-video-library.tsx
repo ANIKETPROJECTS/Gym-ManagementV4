@@ -38,10 +38,6 @@ export default function ClientVideoLibrary() {
   const [viewingBookmarks, setViewingBookmarks] = useState(false);
 
   useEffect(() => {
-    console.log("ClientVideoLibrary rendered, viewingBookmarks:", viewingBookmarks);
-  }, [viewingBookmarks]);
-
-  useEffect(() => {
     const id = localStorage.getItem("clientId");
     if (!id) {
       setLocation("/client-access");
@@ -62,13 +58,19 @@ export default function ClientVideoLibrary() {
 
   const bookmarkMutation = useMutation({
     mutationFn: async ({ videoId, isBookmarked }: { videoId: string; isBookmarked: boolean }) => {
+      console.log("📌 Bookmark mutation triggered:", { videoId, isBookmarked, clientId });
       if (isBookmarked) {
-        return apiRequest('DELETE', `/api/clients/${clientId}/bookmarks/${videoId}`);
+        const result = await apiRequest('DELETE', `/api/clients/${clientId}/bookmarks/${videoId}`);
+        console.log("📌 Deleted bookmark:", result);
+        return result;
       } else {
-        return apiRequest('POST', `/api/clients/${clientId}/bookmarks/${videoId}`);
+        const result = await apiRequest('POST', `/api/clients/${clientId}/bookmarks/${videoId}`);
+        console.log("📌 Created bookmark:", result);
+        return result;
       }
     },
     onSuccess: () => {
+      console.log("📌 Mutation success, invalidating cache for:", [`/api/clients/${clientId}/bookmarks`]);
       queryClient.invalidateQueries({ queryKey: [`/api/clients/${clientId}/bookmarks`] });
     },
   });
@@ -76,11 +78,14 @@ export default function ClientVideoLibrary() {
   const bookmarkedVideos = bookmarks.map((b: any) => b.video).filter(Boolean);
 
   const isVideoBookmarked = (videoId: string) => {
-    return bookmarks.some((b: any) => b.videoId === videoId);
+    const result = bookmarks.some((b: any) => b.videoId === videoId);
+    return result;
   };
 
   const handleToggleBookmark = (videoId: string) => {
+    console.log("📌 Bookmark button clicked for:", videoId);
     const isBookmarked = isVideoBookmarked(videoId);
+    console.log("📌 Current bookmark status:", isBookmarked);
     bookmarkMutation.mutate({ videoId, isBookmarked });
   };
 
@@ -202,7 +207,6 @@ export default function ClientVideoLibrary() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredVideos.map((video) => {
                 const isBookmarked = isVideoBookmarked(video._id);
-                console.log("Rendering video card for", video._id, "isBookmarked:", isBookmarked);
                 return (
                 <Card
                   key={video._id}
