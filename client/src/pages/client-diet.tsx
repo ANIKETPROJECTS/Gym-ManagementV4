@@ -483,6 +483,12 @@ export default function ClientDiet() {
                         {dayMeals.map((meal: any, idx: number) => {
                           const config = getMealTypeIcon(idx);
                           const IconComponent = config.icon;
+                          const mealName = meal.name || meal.type || 'Meal';
+                          const calories = meal.calories || 0;
+                          const protein = meal.protein || 0;
+                          const carbs = meal.carbs || 0;
+                          const fats = meal.fats || 0;
+                          
                           return (
                             <Card 
                               key={idx} 
@@ -501,17 +507,17 @@ export default function ClientDiet() {
                                   </div>
                                   <div className="flex-1">
                                     <div className="flex items-center gap-2 mb-1">
-                                      <h4 className="font-semibold text-gray-900 dark:text-white">{meal.name}</h4>
+                                      <h4 className="font-semibold text-gray-900 dark:text-white">{mealName}</h4>
                                       <Badge variant="outline" className="text-xs">
                                         {meal.time || config.type}
                                       </Badge>
                                     </div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                                      Protein: {meal.protein}g • Carbs: {meal.carbs}g • Fats: {meal.fats}g
+                                      Protein: {protein}g • Carbs: {carbs}g • Fats: {fats}g
                                     </p>
                                   </div>
                                   <Badge variant="secondary" className="bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 border-0">
-                                    {meal.calories}Cal
+                                    {calories}Cal
                                   </Badge>
                                 </div>
                               </CardContent>
@@ -973,20 +979,27 @@ export default function ClientDiet() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {dayMeals.map((meal: any, idx: number) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                      <div>
-                        <p className="font-medium">{meal.name}</p>
-                        <p className="text-sm text-muted-foreground">{meal.time}</p>
+                  {dayMeals.map((meal: any, idx: number) => {
+                    const mealName = meal.name || meal.type || 'Meal';
+                    const calories = meal.calories || 0;
+                    const protein = meal.protein || 0;
+                    const carbs = meal.carbs || 0;
+                    const fats = meal.fats || 0;
+                    return (
+                      <div key={idx} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                        <div>
+                          <p className="font-medium">{mealName}</p>
+                          <p className="text-sm text-muted-foreground">{meal.time}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-semibold text-orange-600">{calories} Cal</p>
+                          <p className="text-xs text-muted-foreground">
+                            P: {protein}g • C: {carbs}g • F: {fats}g
+                          </p>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <p className="font-semibold text-orange-600">{meal.calories} Cal</p>
-                        <p className="text-xs text-muted-foreground">
-                          P: {meal.protein}g • C: {meal.carbs}g • F: {meal.fats}g
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
