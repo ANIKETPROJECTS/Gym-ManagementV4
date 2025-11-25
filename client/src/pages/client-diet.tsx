@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 import { ContactTrainerDialog } from "@/components/contact-trainer-dialog";
 import { useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
@@ -364,7 +365,7 @@ export default function ClientDiet() {
                           </Button>
                           <div className="text-center">
                             <p className="font-semibold text-gray-900 dark:text-white">
-                              {currentWeekLabel}
+                              {currentDayLabel}
                             </p>
                             <p className="text-sm text-muted-foreground">
                               {dayMeals.length} meals
@@ -606,7 +607,7 @@ export default function ClientDiet() {
                   {/* Right Side Stats */}
                   <div className="space-y-4">
                     <div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">{currentWeekLabel} Goal</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">{currentDayLabel} Goal</div>
                       <div className="text-2xl font-bold text-gray-900 dark:text-white">{calorieGoal}</div>
                     </div>
                     <div>
@@ -660,7 +661,7 @@ export default function ClientDiet() {
                     <CardContent className="p-4 flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <span className="text-2xl">📊</span>
-                        <span className="font-semibold">{currentWeekLabel} Dietary Report</span>
+                        <span className="font-semibold">{currentDayLabel} Dietary Report</span>
                       </div>
                       <Button variant="ghost" size="icon" data-testid="button-report-icon">
                         <TrendingDown className="h-5 w-5" />
