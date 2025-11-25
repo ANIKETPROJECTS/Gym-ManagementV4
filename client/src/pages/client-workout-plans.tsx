@@ -164,8 +164,8 @@ export default function ClientWorkoutPlans() {
   };
 
   const PlanCardView = ({ plan }: { plan: WorkoutPlan }) => (
-    <Card className="overflow-hidden hover:shadow-lg transition-all duration-200 border-l-4 border-l-primary">
-      <div className="p-6">
+    <Card className="overflow-hidden hover:shadow-lg transition-all duration-200 border-l-4 border-l-primary flex flex-col h-96">
+      <div className="p-4 flex-1 overflow-y-auto">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
             <h3 className="text-xl font-bold text-foreground mb-2">{plan.name}</h3>
@@ -412,7 +412,7 @@ export default function ClientWorkoutPlans() {
                 <p className="text-sm text-muted-foreground">Your trainer will assign custom workout plans here.</p>
               </Card>
             ) : (
-              <div className={viewMode === 'card' ? 'grid gap-4 md:grid-cols-1 lg:grid-cols-2' : 'space-y-2'}>
+              <div className={viewMode === 'card' ? 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 'space-y-2'}>
                 {plans.map((plan: WorkoutPlan) => (
                   <div key={plan._id}>
                     {viewMode === 'card' ? (
@@ -461,7 +461,7 @@ export default function ClientWorkoutPlans() {
                 <p className="text-sm text-muted-foreground">Bookmark your favorite plans for quick access.</p>
               </Card>
             ) : (
-              <div className={viewMode === 'card' ? 'grid gap-4 md:grid-cols-1 lg:grid-cols-2' : 'space-y-2'}>
+              <div className={viewMode === 'card' ? 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 'space-y-2'}>
                 {bookmarks.map((bookmark: any) => {
                   const plan = bookmark.workoutPlan || plans.find(p => p._id === bookmark.workoutPlanId);
                   return plan ? (
