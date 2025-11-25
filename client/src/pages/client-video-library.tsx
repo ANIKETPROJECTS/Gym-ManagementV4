@@ -38,6 +38,10 @@ export default function ClientVideoLibrary() {
   const [viewingBookmarks, setViewingBookmarks] = useState(false);
 
   useEffect(() => {
+    console.log("ClientVideoLibrary rendered, viewingBookmarks:", viewingBookmarks);
+  }, [viewingBookmarks]);
+
+  useEffect(() => {
     const id = localStorage.getItem("clientId");
     if (!id) {
       setLocation("/client-access");
@@ -75,11 +79,14 @@ export default function ClientVideoLibrary() {
   });
 
   const isVideoBookmarked = (videoId: string) => {
-    return bookmarks.some(b => b.videoId === videoId);
+    const result = bookmarks.some(b => b.videoId === videoId);
+    console.log("isVideoBookmarked called for", videoId, "result:", result, "bookmarks:", bookmarks);
+    return result;
   };
 
   const handleToggleBookmark = (videoId: string) => {
     const isBookmarked = isVideoBookmarked(videoId);
+    console.log("handleToggleBookmark called for", videoId, "isBookmarked:", isBookmarked);
     bookmarkMutation.mutate({ videoId, isBookmarked });
   };
 
@@ -201,6 +208,7 @@ export default function ClientVideoLibrary() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredVideos.map((video) => {
                 const isBookmarked = isVideoBookmarked(video._id);
+                console.log("Rendering video card for", video._id, "isBookmarked:", isBookmarked);
                 return (
                 <Card
                   key={video._id}
@@ -227,22 +235,23 @@ export default function ClientVideoLibrary() {
                         </div>
                       </div>
                     </div>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white z-10"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleToggleBookmark(video._id);
-                      }}
-                      data-testid={`button-bookmark-${video._id}`}
-                    >
-                      {isBookmarked ? (
-                        <BookmarkCheck className="h-5 w-5 fill-white" />
-                      ) : (
-                        <Bookmark className="h-5 w-5" />
-                      )}
-                    </Button>
+                    <div className="absolute top-2 right-2 z-20">
+                      <Button
+                        size="icon"
+                        className="h-10 w-10 rounded-full bg-black/60 hover:bg-black/80 text-white border-0"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleToggleBookmark(video._id);
+                        }}
+                        data-testid={`button-bookmark-${video._id}`}
+                      >
+                        {isBookmarked ? (
+                          <BookmarkCheck className="h-5 w-5 fill-current" />
+                        ) : (
+                          <Bookmark className="h-5 w-5" />
+                        )}
+                      </Button>
+                    </div>
                     {video.duration && (
                       <div className="absolute bottom-2 right-2 bg-black/80 rounded-md px-2 py-1 flex items-center gap-1">
                         <Clock className="h-3 w-3 text-white" />
