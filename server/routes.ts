@@ -2730,6 +2730,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.delete("/api/workout-plans", authenticateToken, requireRole('admin', 'trainer'), async (req, res) => {
+    try {
+      const success = await storage.deleteAllWorkoutPlans();
+      res.json({ success, message: "All workout plans cleared successfully" });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   // Diet Plan routes
   app.get("/api/diet-plans", authenticateToken, async (req, res) => {
     try {
@@ -2844,6 +2853,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const plans = await storage.getClientWorkoutPlans(req.params.clientId);
       res.json(plans);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  app.delete("/api/clients/:clientId/workout-plans", authenticateToken, async (req, res) => {
+    try {
+      const success = await storage.clearClientWorkoutAssignments(req.params.clientId);
+      res.json({ success, message: "All assigned workout plans cleared" });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }

@@ -756,8 +756,45 @@ export class MongoStorage implements IStorage {
   }
 
   async deleteWorkoutPlan(id: string): Promise<boolean> {
-    const result = await WorkoutPlan.findByIdAndDelete(id);
+    const convertedId = new mongoose.Types.ObjectId(id);
+    // Delete all assignments for this plan first (cascade delete)
+    await WorkoutPlanAssignment.deleteMany({ 
+      $or: [
+        { workoutPlanId: convertedId },
+        { workoutPlanId: id as any }
+      ]
+    });
+    // Also delete related bookmarks and notes
+    await WorkoutBookmark.deleteMany({ 
+      $or: [
+        { workoutPlanId: convertedId },
+        { workoutPlanId: id as any }
+      ]
+    });
+    await WorkoutNote.deleteMany({ 
+      $or: [
+        { workoutPlanId: convertedId },
+        { workoutPlanId: id as any }
+      ]
+    });
+    // Delete the plan itself
+    const result = await WorkoutPlan.findByIdAndDelete(convertedId);
     return !!result;
+  }
+
+  async deleteAllWorkoutPlans(): Promise<boolean> {
+    // Delete all plans and their related data
+    await WorkoutPlanAssignment.deleteMany({});
+    await WorkoutBookmark.deleteMany({});
+    await WorkoutNote.deleteMany({});
+    const result = await WorkoutPlan.deleteMany({});
+    return result.deletedCount > 0;
+  }
+
+  async clearClientWorkoutAssignments(clientId: string): Promise<boolean> {
+    const convertedClientId = new mongoose.Types.ObjectId(clientId);
+    const result = await WorkoutPlanAssignment.deleteMany({ clientId: convertedClientId });
+    return result.deletedCount > 0;
   }
 
   async getWorkoutPlanTemplates(category?: string): Promise<IWorkoutPlan[]> {
