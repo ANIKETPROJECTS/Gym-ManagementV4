@@ -48,6 +48,7 @@ import ClientGoals from "@/pages/client-goals";
 import ClientCalculators from "@/pages/client-calculators";
 import ClientNotifications from "@/pages/client-notifications";
 import ClientCalendar from "@/pages/client-calendar";
+import ClientWorkoutPlans from "@/pages/client-workout-plans";
 import AnnouncementsPage from "@/pages/announcements";
 import SupportTicketsPage from "@/pages/support-tickets";
 import TrainerMessaging from "@/pages/trainer-messaging";
@@ -104,6 +105,7 @@ function Router() {
       <Route path="/client/calculators" component={ClientCalculators} />
       <Route path="/client/notifications" component={ClientNotifications} />
       <Route path="/client/calendar" component={ClientCalendar} />
+      <Route path="/client/workout-plans" component={ClientWorkoutPlans} />
       <Route path="/client/announcements" component={AnnouncementsPage} />
       <Route path="/client/support-tickets" component={SupportTicketsPage} />
       <Route path="/client/messages" component={TrainerMessaging} />

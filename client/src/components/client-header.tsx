@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { Calendar, Video, UtensilsCrossed, User, ChevronDown, TrendingUp, Scale, Ruler, Trophy, FileText, Image, Menu, X, ArrowLeft, Calculator, LayoutDashboard, Flame, Zap, Target, Camera, BarChart3, LogOut, Phone } from "lucide-react";
+import { Calendar, Video, UtensilsCrossed, User, ChevronDown, TrendingUp, Scale, Ruler, Trophy, FileText, Image, Menu, X, ArrowLeft, Calculator, LayoutDashboard, Flame, Zap, Target, Camera, BarChart3, LogOut, Phone, Dumbbell } from "lucide-react";
 import { useLocation } from "wouter";
 import { useLanguage } from "@/lib/language-context";
 import { queryClient } from "@/lib/queryClient";
@@ -17,7 +17,7 @@ import logoImage from "@assets/TWWLOGO_1763965276890.png";
 import { TrainerContactDropdown } from "@/components/trainer-contact-dialog";
 
 interface ClientHeaderProps {
-  currentPage?: 'dashboard' | 'workouts' | 'videos' | 'diet' | 'sessions' | 'history' | 'workout-history' | 'progress' | 'progress-photos' | 'profile' | 'weight-tracking' | 'body-measurements' | 'weekly-completion' | 'achievements' | 'achievement-gallery' | 'personal-records' | 'monthly-reports' | 'goals' | 'calculators' | 'calendar' | 'messages' | 'support-tickets' | 'announcements' | 'forum';
+  currentPage?: 'dashboard' | 'workouts' | 'videos' | 'diet' | 'sessions' | 'history' | 'workout-history' | 'workout-plans' | 'progress' | 'progress-photos' | 'profile' | 'weight-tracking' | 'body-measurements' | 'weekly-completion' | 'achievements' | 'achievement-gallery' | 'personal-records' | 'monthly-reports' | 'goals' | 'calculators' | 'calendar' | 'messages' | 'support-tickets' | 'announcements' | 'forum';
   packageName?: string;
 }
 
@@ -101,6 +101,16 @@ export function ClientHeader({ currentPage, packageName }: ClientHeaderProps) {
             >
               <UtensilsCrossed className="h-5 w-5 mr-2 text-orange-600" />
               <span className="hidden xl:inline font-medium">Diet</span>
+            </Button>
+
+            <Button 
+              variant="ghost" 
+              className={`${currentPage === 'workout-plans' ? 'nav-underline-amber' : ''} px-4`}
+              onClick={() => setLocation("/client/workout-plans")}
+              data-testid="link-workout-plans"
+            >
+              <Dumbbell className="h-5 w-5 mr-2 text-amber-600" />
+              <span className="hidden xl:inline font-medium">Workout Plans</span>
             </Button>
 
             <DropdownMenu>
@@ -236,6 +246,19 @@ export function ClientHeader({ currentPage, packageName }: ClientHeaderProps) {
             >
               <UtensilsCrossed className="h-4 w-4 mr-2" />
               {t('nav.nutrition')}
+            </Button>
+
+            <Button 
+              variant="ghost" 
+              className={`w-full justify-start ${currentPage === 'workout-plans' ? 'bg-accent' : ''}`}
+              onClick={() => {
+                setLocation("/client/workout-plans");
+                setMobileMenuOpen(false);
+              }}
+              data-testid="link-workout-plans-mobile"
+            >
+              <Dumbbell className="h-4 w-4 mr-2" />
+              Workout Plans
             </Button>
 
             <div className="space-y-2">
