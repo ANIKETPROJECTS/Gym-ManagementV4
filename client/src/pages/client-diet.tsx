@@ -214,6 +214,7 @@ export default function ClientDiet() {
   let currentDayLabel = currentDay;
   
   if (hasDietPlan) {
+    console.log(`[CLIENT DIET] Meals structure:`, typeof currentPlan.meals, Array.isArray(currentPlan.meals), currentPlan.meals);
     if (Array.isArray(currentPlan.meals)) {
       // Old format: array of meals, group by week
       const mealsByWeek: Record<number, any[]> = {};
@@ -227,15 +228,17 @@ export default function ClientDiet() {
       const totalWeeks = Math.max(...Object.keys(mealsByWeek).map(Number), 1);
       dayMeals = mealsByWeek[currentWeek] || [];
       currentDayLabel = `Week ${currentWeek}`;
-    } else if (typeof currentPlan.meals === 'object') {
+    } else if (typeof currentPlan.meals === 'object' && currentPlan.meals !== null) {
       // New format: object keyed by day name { Monday: {...}, Tuesday: {...} }
+      console.log(`[CLIENT DIET] Using object format, keys:`, Object.keys(currentPlan.meals));
       const mealObj = currentPlan.meals[currentDay];
-      console.log(`[CLIENT DIET] Getting meals for ${currentDay}:`, JSON.stringify(mealObj, null, 2));
+      console.log(`[CLIENT DIET] Getting meals for ${currentDay}:`, mealObj);
       if (mealObj) {
+        console.log(`[CLIENT DIET] MealObj type:`, typeof mealObj, `is array:`, Array.isArray(mealObj), `entries:`, Object.entries(mealObj));
         // Convert from { breakfast: {...}, lunch: {...} } to array of meals
         dayMeals = Object.entries(mealObj).map(([type, data]: [string, any]) => {
           const meal = { type, ...data };
-          console.log(`[CLIENT DIET] Meal before calc totals:`, JSON.stringify(meal, null, 2));
+          console.log(`[CLIENT DIET] Created meal with type='${type}' and data:`, data);
           return calculateMealTotals(meal);
         });
       }
