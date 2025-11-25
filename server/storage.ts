@@ -1020,6 +1020,8 @@ export class MongoStorage implements IStorage {
       meals: data.meals || {},
     };
     const plan = new DietPlan(planData);
+    // Force Mongoose to recognize the meals field as modified
+    plan.markModified('meals');
     const saved = await plan.save();
     // Log the actual meals that were saved
     const mealsKeys = typeof saved.meals === 'object' ? Object.keys(saved.meals).length : 0;
@@ -1044,7 +1046,8 @@ export class MongoStorage implements IStorage {
       meals: data.meals !== undefined ? data.meals : existingPlan?.meals || {},
     };
     
-    const updated = await DietPlan.findByIdAndUpdate(id, updateData, { new: true });
+    // Use $set to force MongoDB to update the meals field
+    const updated = await DietPlan.findByIdAndUpdate(id, { $set: updateData }, { new: true });
     if (updated) {
       const mealsKeys = typeof updated.meals === 'object' ? Object.keys(updated.meals).length : 0;
       console.log(`[Diet Update] Updated diet plan with ${mealsKeys} days of meals`);

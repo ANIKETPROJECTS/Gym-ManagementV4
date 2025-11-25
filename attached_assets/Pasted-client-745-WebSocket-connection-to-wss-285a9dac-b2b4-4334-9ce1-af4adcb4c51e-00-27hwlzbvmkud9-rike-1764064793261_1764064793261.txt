@@ -1,0 +1,30 @@
+client:745 WebSocket connection to 'wss://285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/?token=HjtjllSE53UN' failed: 
+createConnection @ client:745
+connect @ client:411
+connect @ client:751
+connect @ client:289
+connect @ client:373
+(anonymous) @ client:823
+client:755 WebSocket connection to 'wss://localhost:5173/?token=HjtjllSE53UN' failed: 
+createConnection @ client:755
+connect @ client:411
+connect @ client:759
+client:765 [vite] failed to connect to websocket.
+your current setup:
+  (browser) 285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/ <--[HTTP]--> localhost:5173/ (server)
+  (browser) 285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev:/ <--[WebSocket (failing)]--> localhost:5173/ (server)
+Check out your Vite / network configuration and https://vite.dev/config/server-options.html#server-hmr .
+connect @ client:765
+await in connect
+connect @ client:289
+connect @ client:373
+(anonymous) @ client:823
+chunk-E22KYI7D.js?v=c51c7109:21609 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+client-diet.tsx:59 [CLIENT DIET] Initializing, clientId from storage: 69202b504ab4a0b2fb0e5e75
+client-diet.tsx:85 [CLIENT DIET] Query data updated: {dietPlans: undefined, isLoading: true, planCount: 0, firstPlan: 'NO PLAN', clientId: null, …}
+client-diet.tsx:85 [CLIENT DIET] Query data updated: {dietPlans: undefined, isLoading: true, planCount: 0, firstPlan: 'NO PLAN', clientId: '69202b504ab4a0b2fb0e5e75', …}
+client-diet.tsx:206 [CALC TOTALS] Using top-level totals for "Monday meal": {calories: 0, protein: 0, carbs: 0, fats: 0}
+client-diet.tsx:206 [CALC TOTALS] Using top-level totals for "Wednesday meal": {calories: 0, protein: 0, carbs: 0, fats: 0}
+client-diet.tsx:85 [CLIENT DIET] Query data updated: {dietPlans: Array(1), isLoading: false, planCount: 1, firstPlan: 'er', clientId: '69202b504ab4a0b2fb0e5e75', …}
+client-diet.tsx:206 [CALC TOTALS] Using top-level totals for "Monday meal": {calories: 0, protein: 0, carbs: 0, fats: 0}
+client-diet.tsx:206 [CALC TOTALS] Using top-level totals for "Wednesday meal": {calories: 0, protein: 0, carbs: 0, fats: 0}
