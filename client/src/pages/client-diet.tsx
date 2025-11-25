@@ -46,14 +46,21 @@ export default function ClientDiet() {
   const [contactTrainerOpen, setContactTrainerOpen] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState<any>(null);
   const [showRecipeModal, setShowRecipeModal] = useState(false);
+  const [clientAllergens, setClientAllergens] = useState<string[]>([]);
+  const [showGroceryModal, setShowGroceryModal] = useState(false);
+  const [supplements, setSupplements] = useState<any[]>([]);
+  const [newSupplement, setNewSupplement] = useState({ name: '', dosage: '', timing: '' });
+  const [supplementLog, setSupplementLog] = useState<any[]>([]);
 
   useEffect(() => {
     const id = localStorage.getItem("clientId");
+    const allergens = localStorage.getItem("clientAllergens");
     console.log('[CLIENT DIET] Initializing, clientId from storage:', id);
     if (!id) {
       setLocation("/client-access");
     } else {
       setClientId(id);
+      if (allergens) setClientAllergens(JSON.parse(allergens));
     }
   }, [setLocation]);
 
