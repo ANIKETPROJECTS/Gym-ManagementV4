@@ -383,6 +383,49 @@ export default function ClientDiet() {
               </Card>
             ) : (
               <div className="space-y-6">
+                {/* Available Plans List */}
+                {dietPlans && dietPlans.length > 0 && (
+                  <div>
+                    <h2 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">Your Diet Plans</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                      {dietPlans.map((plan: any, idx: number) => (
+                        <Card 
+                          key={idx} 
+                          className={`cursor-pointer transition-all ${plan._id === currentPlan?._id ? 'ring-2 ring-green-500 bg-green-50 dark:bg-green-950/30' : 'hover-elevate'}`}
+                          onClick={() => {
+                            // Allow switching between plans if user has multiple
+                            setCurrentDay('Monday');
+                            setCurrentWeek(1);
+                          }}
+                          data-testid={`card-diet-plan-${idx}`}
+                        >
+                          <CardContent className="p-4">
+                            <div className="flex items-start justify-between gap-2 mb-3">
+                              <div className="flex-1">
+                                <h3 className="font-semibold text-gray-900 dark:text-white">{plan.name}</h3>
+                                <p className="text-xs text-muted-foreground mt-1">{plan.description || 'Custom meal plan'}</p>
+                              </div>
+                              {plan._id === currentPlan?._id && (
+                                <Badge className="bg-green-500 whitespace-nowrap">Active</Badge>
+                              )}
+                            </div>
+                            <div className="space-y-2">
+                              <div className="flex justify-between text-sm">
+                                <span className="text-muted-foreground">Calories:</span>
+                                <span className="font-semibold text-gray-900 dark:text-white">{plan.targetCalories || 2000}</span>
+                              </div>
+                              <div className="flex justify-between text-sm">
+                                <span className="text-muted-foreground">Protein:</span>
+                                <span className="font-semibold text-gray-900 dark:text-white">{plan.protein || 140}g</span>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Header with Plan Name */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
