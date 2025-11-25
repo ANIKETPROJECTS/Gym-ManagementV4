@@ -236,7 +236,11 @@ export default function ClientVideoLibrary() {
                     <div className="absolute top-2 right-2 z-20">
                       <Button
                         size="icon"
-                        className="h-10 w-10 rounded-full bg-black/60 hover:bg-black/80 text-white border-0"
+                        className={`h-10 w-10 rounded-full border-0 transition-colors ${
+                          isBookmarked 
+                            ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
+                            : 'bg-black/60 hover:bg-black/80 text-white'
+                        }`}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleToggleBookmark(video._id);
