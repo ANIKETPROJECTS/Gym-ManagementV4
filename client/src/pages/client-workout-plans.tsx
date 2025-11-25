@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Bookmark, BookmarkCheck, CheckCircle2, Clock, Dumbbell, BarChart3, FileText, AlertCircle, Loader2, GripVertical, Grid3x3, ChevronDown, ChevronUp, Target, Flame } from "lucide-react";
+import { Bookmark, BookmarkCheck, CheckCircle2, Clock, Dumbbell, BarChart3, FileText, AlertCircle, Loader2, GripVertical, LayoutGrid, ChevronDown, ChevronUp, Target, Flame } from "lucide-react";
 import { useState } from "react";
 
 interface WorkoutPlan {
@@ -396,7 +396,7 @@ export default function ClientWorkoutPlans() {
                   onClick={() => setViewMode('card')}
                   className="px-3"
                 >
-                  <Grid3x3 className="h-4 w-4" />
+                  <LayoutGrid className="h-4 w-4" />
                 </Button>
                 <Button
                   size="sm"
@@ -445,7 +445,7 @@ export default function ClientWorkoutPlans() {
                   onClick={() => setViewMode('card')}
                   className="px-3"
                 >
-                  <Grid3x3 className="h-4 w-4" />
+                  <LayoutGrid className="h-4 w-4" />
                 </Button>
                 <Button
                   size="sm"
