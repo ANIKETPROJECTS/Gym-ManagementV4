@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Clock, Play, Search, Filter, Loader2, X } from "lucide-react";
+import { Clock, Play, Search, Filter, Loader2, X, Bookmark } from "lucide-react";
 import { useLocation } from "wouter";
 import { useState, useEffect } from "react";
 import { MobileNavigation } from "@/components/mobile-navigation";
@@ -34,6 +34,7 @@ export default function ClientVideoLibrary() {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [difficultyFilter, setDifficultyFilter] = useState<string>("all");
+  const [viewingBookmarks, setViewingBookmarks] = useState(false);
 
   useEffect(() => {
     const id = localStorage.getItem("clientId");
@@ -49,8 +50,14 @@ export default function ClientVideoLibrary() {
     enabled: !!clientId,
   });
 
+  const { data: bookmarkedVideos = [], isLoading: bookmarksLoading } = useQuery<Video[]>({
+    queryKey: ['/api/clients', clientId, 'bookmarks'],
+    enabled: !!clientId,
+  });
+
   // Filter videos (exclude drafts)
-  const filteredVideos = videos
+  const displayVideos = viewingBookmarks ? bookmarkedVideos : videos;
+  const filteredVideos = displayVideos
     .filter(video => !video.isDraft)
     .filter(video => {
       const matchesSearch = video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -69,13 +76,26 @@ export default function ClientVideoLibrary() {
         <div className="max-w-7xl mx-auto space-y-8">
           {/* Header */}
           <div className="space-y-4">
-            <div>
-              <h1 className="text-4xl sm:text-5xl font-black text-black dark:text-white">
-                Video Library
-              </h1>
-              <p className="text-muted-foreground mt-2">
-                Browse and watch all available workout videos
-              </p>
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-4xl sm:text-5xl font-black text-black dark:text-white">
+                  {viewingBookmarks ? "Bookmarked Videos" : "Video Library"}
+                </h1>
+                <p className="text-muted-foreground mt-2">
+                  {viewingBookmarks 
+                    ? "Your saved workout videos" 
+                    : "Browse and watch all available workout videos"}
+                </p>
+              </div>
+              <Button
+                onClick={() => setViewingBookmarks(!viewingBookmarks)}
+                variant={viewingBookmarks ? "default" : "outline"}
+                className="gap-2 whitespace-nowrap"
+                data-testid="button-bookmarks-toggle"
+              >
+                <Bookmark className="h-4 w-4" />
+                <span className="hidden sm:inline">Bookmarks</span>
+              </Button>
             </div>
 
             {/* Search and Filters */}
@@ -129,17 +149,19 @@ export default function ClientVideoLibrary() {
           </div>
 
           {/* Loading State */}
-          {isLoading && (
+          {(isLoading || bookmarksLoading) && (
             <div className="flex items-center justify-center py-12">
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
           )}
 
           {/* Empty State */}
-          {!isLoading && filteredVideos.length === 0 && (
+          {!(isLoading || bookmarksLoading) && filteredVideos.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">
-                {searchQuery || categoryFilter !== "all" || difficultyFilter !== "all"
+                {viewingBookmarks
+                  ? "You haven't bookmarked any videos yet."
+                  : searchQuery || categoryFilter !== "all" || difficultyFilter !== "all"
                   ? "No videos found matching your filters."
                   : "No videos available yet."}
               </p>
@@ -147,7 +169,7 @@ export default function ClientVideoLibrary() {
           )}
 
           {/* Videos Grid */}
-          {!isLoading && filteredVideos.length > 0 && (
+          {!(isLoading || bookmarksLoading) && filteredVideos.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredVideos.map((video) => (
                 <Card
