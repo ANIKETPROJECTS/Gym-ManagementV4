@@ -1,0 +1,172 @@
+client-diet.tsx:609 Uncaught ReferenceError: currentWeekLabel is not defined
+    at ClientDiet (client-diet.tsx:609:82)
+    at renderWithHooks (chunk-E22KYI7D.js?v=c51c7109:11596:26)
+    at mountIndeterminateComponent (chunk-E22KYI7D.js?v=c51c7109:14974:21)
+    at beginWork (chunk-E22KYI7D.js?v=c51c7109:15962:22)
+    at HTMLUnknownElement.callCallback2 (chunk-E22KYI7D.js?v=c51c7109:3680:22)
+    at Object.invokeGuardedCallbackDev (chunk-E22KYI7D.js?v=c51c7109:3705:24)
+    at invokeGuardedCallback (chunk-E22KYI7D.js?v=c51c7109:3739:39)
+    at beginWork$1 (chunk-E22KYI7D.js?v=c51c7109:19818:15)
+    at performUnitOfWork (chunk-E22KYI7D.js?v=c51c7109:19251:20)
+    at workLoopSync (chunk-E22KYI7D.js?v=c51c7109:19190:13)
+ClientDiet @ client-diet.tsx:609
+renderWithHooks @ chunk-E22KYI7D.js?v=c51c7109:11596
+mountIndeterminateComponent @ chunk-E22KYI7D.js?v=c51c7109:14974
+beginWork @ chunk-E22KYI7D.js?v=c51c7109:15962
+callCallback2 @ chunk-E22KYI7D.js?v=c51c7109:3680
+invokeGuardedCallbackDev @ chunk-E22KYI7D.js?v=c51c7109:3705
+invokeGuardedCallback @ chunk-E22KYI7D.js?v=c51c7109:3739
+beginWork$1 @ chunk-E22KYI7D.js?v=c51c7109:19818
+performUnitOfWork @ chunk-E22KYI7D.js?v=c51c7109:19251
+workLoopSync @ chunk-E22KYI7D.js?v=c51c7109:19190
+renderRootSync @ chunk-E22KYI7D.js?v=c51c7109:19169
+performSyncWorkOnRoot @ chunk-E22KYI7D.js?v=c51c7109:18927
+flushSyncCallbacks @ chunk-E22KYI7D.js?v=c51c7109:9166
+(anonymous) @ chunk-E22KYI7D.js?v=c51c7109:18677
+client-diet.tsx:609 Uncaught ReferenceError: currentWeekLabel is not defined
+    at ClientDiet (client-diet.tsx:609:82)
+    at renderWithHooks (chunk-E22KYI7D.js?v=c51c7109:11596:26)
+    at mountIndeterminateComponent (chunk-E22KYI7D.js?v=c51c7109:14974:21)
+    at beginWork (chunk-E22KYI7D.js?v=c51c7109:15962:22)
+    at HTMLUnknownElement.callCallback2 (chunk-E22KYI7D.js?v=c51c7109:3680:22)
+    at Object.invokeGuardedCallbackDev (chunk-E22KYI7D.js?v=c51c7109:3705:24)
+    at invokeGuardedCallback (chunk-E22KYI7D.js?v=c51c7109:3739:39)
+    at beginWork$1 (chunk-E22KYI7D.js?v=c51c7109:19818:15)
+    at performUnitOfWork (chunk-E22KYI7D.js?v=c51c7109:19251:20)
+    at workLoopSync (chunk-E22KYI7D.js?v=c51c7109:19190:13)
+ClientDiet @ client-diet.tsx:609
+renderWithHooks @ chunk-E22KYI7D.js?v=c51c7109:11596
+mountIndeterminateComponent @ chunk-E22KYI7D.js?v=c51c7109:14974
+beginWork @ chunk-E22KYI7D.js?v=c51c7109:15962
+callCallback2 @ chunk-E22KYI7D.js?v=c51c7109:3680
+invokeGuardedCallbackDev @ chunk-E22KYI7D.js?v=c51c7109:3705
+invokeGuardedCallback @ chunk-E22KYI7D.js?v=c51c7109:3739
+beginWork$1 @ chunk-E22KYI7D.js?v=c51c7109:19818
+performUnitOfWork @ chunk-E22KYI7D.js?v=c51c7109:19251
+workLoopSync @ chunk-E22KYI7D.js?v=c51c7109:19190
+renderRootSync @ chunk-E22KYI7D.js?v=c51c7109:19169
+recoverFromConcurrentError @ chunk-E22KYI7D.js?v=c51c7109:18786
+performSyncWorkOnRoot @ chunk-E22KYI7D.js?v=c51c7109:18932
+flushSyncCallbacks @ chunk-E22KYI7D.js?v=c51c7109:9166
+(anonymous) @ chunk-E22KYI7D.js?v=c51c7109:18677
+chunk-E22KYI7D.js?v=c51c7109:14080 The above error occurred in the <ClientDiet> component:
+
+    at ClientDiet (https://285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/src/pages/client-diet.tsx:54:27)
+    at Route (https://285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=c51c7109:322:16)
+    at Switch (https://285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=c51c7109:378:17)
+    at Router
+    at Provider (https://285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-M7N4426V.js?v=c51c7109:37:15)
+    at TooltipProvider (https://285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=c51c7109:64:5)
+    at LanguageProvider (https://285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/src/lib/language-context.tsx:856:36)
+    at QueryClientProvider (https://285a9dac-b2b4-4334-9ce1-af4adcb4c51e-00-27hwlzbvmkud9.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=c51c7109:2747:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+logCapturedError @ chunk-E22KYI7D.js?v=c51c7109:14080
+update.callback @ chunk-E22KYI7D.js?v=c51c7109:14100
+callCallback @ chunk-E22KYI7D.js?v=c51c7109:11296
+commitUpdateQueue @ chunk-E22KYI7D.js?v=c51c7109:11313
+commitLayoutEffectOnFiber @ chunk-E22KYI7D.js?v=c51c7109:17141
+commitLayoutMountEffects_complete @ chunk-E22KYI7D.js?v=c51c7109:18030
+commitLayoutEffects_begin @ chunk-E22KYI7D.js?v=c51c7109:18019
+commitLayoutEffects @ chunk-E22KYI7D.js?v=c51c7109:17970
+commitRootImpl @ chunk-E22KYI7D.js?v=c51c7109:19406
+commitRoot @ chunk-E22KYI7D.js?v=c51c7109:19330
+performSyncWorkOnRoot @ chunk-E22KYI7D.js?v=c51c7109:18948
+flushSyncCallbacks @ chunk-E22KYI7D.js?v=c51c7109:9166
+(anonymous) @ chunk-E22KYI7D.js?v=c51c7109:18677
+chunk-E22KYI7D.js?v=c51c7109:9176 Uncaught ReferenceError: currentWeekLabel is not defined
+    at ClientDiet (client-diet.tsx:609:82)
+    at renderWithHooks (chunk-E22KYI7D.js?v=c51c7109:11596:26)
+    at mountIndeterminateComponent (chunk-E22KYI7D.js?v=c51c7109:14974:21)
+    at beginWork (chunk-E22KYI7D.js?v=c51c7109:15962:22)
+    at beginWork$1 (chunk-E22KYI7D.js?v=c51c7109:19806:22)
+    at performUnitOfWork (chunk-E22KYI7D.js?v=c51c7109:19251:20)
+    at workLoopSync (chunk-E22KYI7D.js?v=c51c7109:19190:13)
+    at renderRootSync (chunk-E22KYI7D.js?v=c51c7109:19169:15)
+    at recoverFromConcurrentError (chunk-E22KYI7D.js?v=c51c7109:18786:28)
+    at performSyncWorkOnRoot (chunk-E22KYI7D.js?v=c51c7109:18932:28)
+ClientDiet @ client-diet.tsx:609
+renderWithHooks @ chunk-E22KYI7D.js?v=c51c7109:11596
+mountIndeterminateComponent @ chunk-E22KYI7D.js?v=c51c7109:14974
+beginWork @ chunk-E22KYI7D.js?v=c51c7109:15962
+beginWork$1 @ chunk-E22KYI7D.js?v=c51c7109:19806
+performUnitOfWork @ chunk-E22KYI7D.js?v=c51c7109:19251
+workLoopSync @ chunk-E22KYI7D.js?v=c51c7109:19190
+renderRootSync @ chunk-E22KYI7D.js?v=c51c7109:19169
+recoverFromConcurrentError @ chunk-E22KYI7D.js?v=c51c7109:18786
+performSyncWorkOnRoot @ chunk-E22KYI7D.js?v=c51c7109:18932
+flushSyncCallbacks @ chunk-E22KYI7D.js?v=c51c7109:9166
+(anonymous) @ chunk-E22KYI7D.js?v=c51c7109:18677
+client:809 [vite] TypeError: Cannot read properties of undefined (reading 'send')
+    at Object.send (client:449:7)
+    at Object.send (client:780:16)
+    at Object.send (client:318:23)
+    at Object.send (client:396:30)
+    at HMRClient.send (client:157:18)
+    at HMRContext.send (client:119:18)
+    at sendError (VM9:13:7)
+    at VM9:17:3
+    at Object.invokeGuardedCallbackDev (chunk-E22KYI7D.js?v=c51c7109:3705:24)
+    at invokeGuardedCallback (chunk-E22KYI7D.js?v=c51c7109:3739:39)
+error @ client:809
+(anonymous) @ client:158
+Promise.catch
+send @ client:157
+send @ client:119
+sendError @ VM9:13
+(anonymous) @ VM9:17
+invokeGuardedCallbackDev @ chunk-E22KYI7D.js?v=c51c7109:3705
+invokeGuardedCallback @ chunk-E22KYI7D.js?v=c51c7109:3739
+beginWork$1 @ chunk-E22KYI7D.js?v=c51c7109:19818
+performUnitOfWork @ chunk-E22KYI7D.js?v=c51c7109:19251
+workLoopSync @ chunk-E22KYI7D.js?v=c51c7109:19190
+renderRootSync @ chunk-E22KYI7D.js?v=c51c7109:19169
+performSyncWorkOnRoot @ chunk-E22KYI7D.js?v=c51c7109:18927
+flushSyncCallbacks @ chunk-E22KYI7D.js?v=c51c7109:9166
+(anonymous) @ chunk-E22KYI7D.js?v=c51c7109:18677
+client:809 [vite] TypeError: Cannot read properties of undefined (reading 'send')
+    at Object.send (client:449:7)
+    at Object.send (client:780:16)
+    at Object.send (client:318:23)
+    at Object.send (client:396:30)
+    at HMRClient.send (client:157:18)
+    at HMRContext.send (client:119:18)
+    at sendError (VM9:13:7)
+    at VM9:17:3
+    at Object.invokeGuardedCallbackDev (chunk-E22KYI7D.js?v=c51c7109:3705:24)
+    at invokeGuardedCallback (chunk-E22KYI7D.js?v=c51c7109:3739:39)
+error @ client:809
+(anonymous) @ client:158
+Promise.catch
+send @ client:157
+send @ client:119
+sendError @ VM9:13
+(anonymous) @ VM9:17
+invokeGuardedCallbackDev @ chunk-E22KYI7D.js?v=c51c7109:3705
+invokeGuardedCallback @ chunk-E22KYI7D.js?v=c51c7109:3739
+beginWork$1 @ chunk-E22KYI7D.js?v=c51c7109:19818
+performUnitOfWork @ chunk-E22KYI7D.js?v=c51c7109:19251
+workLoopSync @ chunk-E22KYI7D.js?v=c51c7109:19190
+renderRootSync @ chunk-E22KYI7D.js?v=c51c7109:19169
+recoverFromConcurrentError @ chunk-E22KYI7D.js?v=c51c7109:18786
+performSyncWorkOnRoot @ chunk-E22KYI7D.js?v=c51c7109:18932
+flushSyncCallbacks @ chunk-E22KYI7D.js?v=c51c7109:9166
+(anonymous) @ chunk-E22KYI7D.js?v=c51c7109:18677
+client:809 [vite] TypeError: Cannot read properties of undefined (reading 'send')
+    at Object.send (client:449:7)
+    at Object.send (client:780:16)
+    at Object.send (client:318:23)
+    at Object.send (client:396:30)
+    at HMRClient.send (client:157:18)
+    at HMRContext.send (client:119:18)
+    at sendError (VM9:13:7)
+    at VM9:17:3
+error @ client:809
+(anonymous) @ client:158
+Promise.catch
+send @ client:157
+send @ client:119
+sendError @ VM9:13
+(anonymous) @ VM9:17

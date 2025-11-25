@@ -907,7 +907,7 @@ export default function ClientDiet() {
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold flex items-center gap-2">
               <TrendingDown className="h-6 w-6 text-green-600" />
-              {currentWeekLabel} Dietary Report
+              {currentDayLabel} Dietary Report
             </DialogTitle>
           </DialogHeader>
           
@@ -915,7 +915,7 @@ export default function ClientDiet() {
             {/* Weekly Summary */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">{currentWeekLabel} Summary</CardTitle>
+                <CardTitle className="text-lg">{currentDayLabel} Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
