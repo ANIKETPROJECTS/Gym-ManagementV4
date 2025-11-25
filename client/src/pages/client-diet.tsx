@@ -150,32 +150,52 @@ export default function ClientDiet() {
     return configs[mealIndex % configs.length];
   };
 
-  // Extract meals from the array structure
-  const hasDietPlan = currentPlan && Array.isArray(currentPlan.meals) && currentPlan.meals.length > 0;
-  const allMeals = hasDietPlan ? currentPlan.meals : [];
+  // Support both array and object (day-based) meal structures
+  const DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const [currentDay, setCurrentDay] = useState<string>('Monday');
   
-  // Group meals by week (using weekNumber field)
-  const mealsByWeek: Record<number, any[]> = {};
+  const hasDietPlan = currentPlan && (
+    (Array.isArray(currentPlan.meals) && currentPlan.meals.length > 0) ||
+    (typeof currentPlan.meals === 'object' && Object.keys(currentPlan.meals).length > 0)
+  );
   
-  allMeals.forEach((meal: any) => {
-    const weekNum = meal.weekNumber ?? 1;
-    if (!mealsByWeek[weekNum]) {
-      mealsByWeek[weekNum] = [];
+  // Get meals - handle both array and object (day-based) formats
+  let dayMeals: any[] = [];
+  let currentDayLabel = currentDay;
+  
+  if (hasDietPlan) {
+    if (Array.isArray(currentPlan.meals)) {
+      // Old format: array of meals, group by week
+      const mealsByWeek: Record<number, any[]> = {};
+      currentPlan.meals.forEach((meal: any) => {
+        const weekNum = meal.weekNumber ?? 1;
+        if (!mealsByWeek[weekNum]) {
+          mealsByWeek[weekNum] = [];
+        }
+        mealsByWeek[weekNum].push(meal);
+      });
+      const totalWeeks = Math.max(...Object.keys(mealsByWeek).map(Number), 1);
+      dayMeals = mealsByWeek[currentWeek] || [];
+      currentDayLabel = `Week ${currentWeek}`;
+    } else if (typeof currentPlan.meals === 'object') {
+      // New format: object keyed by day name { Monday: {...}, Tuesday: {...} }
+      const mealObj = currentPlan.meals[currentDay];
+      if (mealObj) {
+        // Convert from { breakfast: {...}, lunch: {...} } to array of meals
+        dayMeals = Object.entries(mealObj).map(([type, data]: [string, any]) => ({
+          type,
+          ...data
+        }));
+      }
+      currentDayLabel = currentDay;
     }
-    mealsByWeek[weekNum].push(meal);
-  });
-  
-  const totalWeeks = Math.max(...Object.keys(mealsByWeek).map(Number), 1);
-  const weekMeals = mealsByWeek[currentWeek] || [];
-  const currentWeekLabel = `Week ${currentWeek}`;
-  const hasNextWeek = currentWeek < totalWeeks;
-  const hasPrevWeek = currentWeek > 1;
+  }
 
-  // Macro calculations for the current week
-  const totalCalories = weekMeals.reduce((sum: number, meal: any) => sum + (meal.calories || 0), 0);
-  const totalProtein = weekMeals.reduce((sum: number, meal: any) => sum + (meal.protein || 0), 0);
-  const totalCarbs = weekMeals.reduce((sum: number, meal: any) => sum + (meal.carbs || 0), 0);
-  const totalFats = weekMeals.reduce((sum: number, meal: any) => sum + (meal.fats || 0), 0);
+  // Macro calculations for the current day/week
+  const totalCalories = dayMeals.reduce((sum: number, meal: any) => sum + (meal.calories || 0), 0);
+  const totalProtein = dayMeals.reduce((sum: number, meal: any) => sum + (meal.protein || 0), 0);
+  const totalCarbs = dayMeals.reduce((sum: number, meal: any) => sum + (meal.carbs || 0), 0);
+  const totalFats = dayMeals.reduce((sum: number, meal: any) => sum + (meal.fats || 0), 0);
   
   // These are daily totals (all meals for the current day)
   const dailyCalories = totalCalories;
@@ -248,38 +268,81 @@ export default function ClientDiet() {
                       )}
                     </div>
 
-                    {/* Day Navigation */}
+                    {/* Day/Week Navigation */}
                     <div className="flex items-center justify-between gap-4 mb-4">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={handlePrevWeek}
-                        disabled={!hasPrevWeek}
-                        data-testid="button-prev-week"
-                        className="flex items-center gap-2"
-                      >
-                        <ChevronLeft className="h-4 w-4" />
-                        Previous
-                      </Button>
-                      <div className="text-center">
-                        <p className="font-semibold text-gray-900 dark:text-white">
-                          {currentWeekLabel}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {weekMeals.length} meals
-                        </p>
-                      </div>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={handleNextWeek}
-                        disabled={!hasNextWeek}
-                        data-testid="button-next-week"
-                        className="flex items-center gap-2"
-                      >
-                        Next
-                        <ChevronRight className="h-4 w-4" />
-                      </Button>
+                      {Array.isArray(currentPlan?.meals) ? (
+                        <>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handlePrevWeek}
+                            disabled={!hasPrevWeek}
+                            data-testid="button-prev-week"
+                            className="flex items-center gap-2"
+                          >
+                            <ChevronLeft className="h-4 w-4" />
+                            Previous
+                          </Button>
+                          <div className="text-center">
+                            <p className="font-semibold text-gray-900 dark:text-white">
+                              {currentWeekLabel}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              {dayMeals.length} meals
+                            </p>
+                          </div>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleNextWeek}
+                            disabled={!hasNextWeek}
+                            data-testid="button-next-week"
+                            className="flex items-center gap-2"
+                          >
+                            Next
+                            <ChevronRight className="h-4 w-4" />
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              const currentIdx = DAYS_OF_WEEK.indexOf(currentDay);
+                              if (currentIdx > 0) setCurrentDay(DAYS_OF_WEEK[currentIdx - 1]);
+                            }}
+                            disabled={DAYS_OF_WEEK.indexOf(currentDay) === 0}
+                            data-testid="button-prev-day"
+                            className="flex items-center gap-2"
+                          >
+                            <ChevronLeft className="h-4 w-4" />
+                            Previous
+                          </Button>
+                          <div className="text-center">
+                            <p className="font-semibold text-gray-900 dark:text-white">
+                              {currentDayLabel}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              {dayMeals.length} meals
+                            </p>
+                          </div>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              const currentIdx = DAYS_OF_WEEK.indexOf(currentDay);
+                              if (currentIdx < DAYS_OF_WEEK.length - 1) setCurrentDay(DAYS_OF_WEEK[currentIdx + 1]);
+                            }}
+                            disabled={DAYS_OF_WEEK.indexOf(currentDay) === DAYS_OF_WEEK.length - 1}
+                            data-testid="button-next-day"
+                            className="flex items-center gap-2"
+                          >
+                            Next
+                            <ChevronRight className="h-4 w-4" />
+                          </Button>
+                        </>
+                      )}
                     </div>
 
                     {/* Total Calories Card */}
@@ -290,6 +353,24 @@ export default function ClientDiet() {
                       </div>
                       <span className="text-2xl font-bold text-orange-600 dark:text-orange-400">{totalCalories} Cal</span>
                     </div>
+
+                    {/* Day Selection for multi-day plans */}
+                    {typeof currentPlan?.meals === 'object' && !Array.isArray(currentPlan.meals) && (
+                      <div className="mb-6 flex flex-wrap gap-2">
+                        {DAYS_OF_WEEK.map((day) => (
+                          <Button
+                            key={day}
+                            variant={currentDay === day ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setCurrentDay(day)}
+                            disabled={!currentPlan.meals[day]}
+                            data-testid={`button-day-${day}`}
+                          >
+                            {day.slice(0, 3)}
+                          </Button>
+                        ))}
+                      </div>
+                    )}
 
                     {/* Meals List */}
                     {weekMeals.length === 0 ? (

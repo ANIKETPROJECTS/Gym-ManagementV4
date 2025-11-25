@@ -626,9 +626,9 @@ export function DietTemplateList({ isTrainer = false, trainerId = '' }: { isTrai
 
                     {selectedMealTypes.includes(mealType.value) && (
                       <div className="ml-6 space-y-3">
-                        {formData.meals
-                          .find((m) => m.type === mealType.value)
-                          ?.dishes.map((dish, dishIndex) => (
+                        {(formData.meals[formData.selectedDay] || [])
+                          .find((m: any) => m.type === mealType.value)
+                          ?.dishes.map((dish: any, dishIndex: any) => (
                             <Card key={dishIndex} className="p-4">
                               <div className="space-y-3">
                                 <div className="flex items-start justify-between gap-2">
@@ -715,7 +715,7 @@ export function DietTemplateList({ isTrainer = false, trainerId = '' }: { isTrai
                               </div>
                             </Card>
                           ))}
-                        {formData.meals.find((m) => m.type === mealType.value)?.dishes.length === 0 && (
+                        {(formData.meals[formData.selectedDay] || []).find((m: any) => m.type === mealType.value)?.dishes.length === 0 && (
                           <p className="text-sm text-muted-foreground italic">No dishes added yet. Click "Add Dish" to get started.</p>
                         )}
                       </div>
