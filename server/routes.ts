@@ -3083,23 +3083,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/diet-plan-templates", authenticateToken, async (req, res) => {
     try {
       const category = req.query.category as string | undefined;
-      let allPlans = await DietPlan.find({ isTemplate: true }).lean();
+      const assigned = req.query.assigned === 'true';
+      
+      let query: any = { isTemplate: true };
+      
+      // If assigned=true, fetch assigned plans (those with clientId) instead of templates
+      if (assigned) {
+        query = { clientId: { $exists: true, $ne: null } };
+      }
+      
+      let allPlans = await DietPlan.find(query);
       
       // Filter by category if provided
       if (category && category !== 'all') {
         allPlans = allPlans.filter((plan: any) => plan.category === category);
       }
       
-      // Add template source badge
+      // Add template source badge and log meals data
       const templatesWithSource = allPlans.map((plan: any) => {
+        const planObj = plan.toObject();
         const isAdminTemplate = plan.createdBy?.toString().includes('admin') || !plan.createdBy;
+        
+        // Log meals for debugging
+        if (planObj.meals && typeof planObj.meals === 'object' && !Array.isArray(planObj.meals)) {
+          const mealsKeys = Object.keys(planObj.meals);
+          console.log(`[API Diet Templates] Plan: ${plan.name}, assigned=${assigned}, meals days: [${mealsKeys.join(', ')}]`);
+        }
+        
         return {
-          ...plan,
+          ...planObj,
           templateSource: isAdminTemplate ? 'admin' : 'trainer',
           isTemplate: true
         };
       });
       
+      console.log(`[API Diet Templates] Returning ${templatesWithSource.length} plans (assigned=${assigned})`);
       res.json(templatesWithSource);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
