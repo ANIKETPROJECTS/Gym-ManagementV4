@@ -360,7 +360,7 @@ export default function ClientDiet() {
             </TabsTrigger>
           </TabsList>
 
-          {/* Diet Tab */}
+          {/* Diet Tab - FRESH REWRITE */}
           <TabsContent value="diet" className="space-y-6">
             {isLoadingDiet ? (
               <Card>
@@ -368,13 +368,13 @@ export default function ClientDiet() {
                   <p className="text-muted-foreground">Loading your diet plan...</p>
                 </CardContent>
               </Card>
-            ) : !hasDietPlan ? (
+            ) : !currentPlan ? (
               <Card className="bg-gradient-to-br from-orange-50 to-yellow-50 border-orange-200 dark:from-orange-950 dark:to-yellow-950 dark:border-orange-800">
                 <CardContent className="p-8 text-center space-y-4">
                   <UtensilsCrossed className="h-16 w-16 mx-auto text-orange-500" />
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white">No Diet Plan Assigned</h2>
                   <p className="text-muted-foreground max-w-md mx-auto">
-                    Your trainer hasn't assigned a diet plan yet. Please contact your trainer to get a personalized meal plan tailored to your fitness goals.
+                    Your trainer hasn't assigned a diet plan yet. Contact your trainer to get started.
                   </p>
                   <Button variant="outline" className="mt-4" onClick={() => setContactTrainerOpen(true)} data-testid="button-contact-trainer">
                     Contact Trainer
@@ -383,40 +383,35 @@ export default function ClientDiet() {
               </Card>
             ) : (
               <div className="space-y-6">
-                {/* Available Plans List */}
+                {/* Your Diet Plans Section */}
                 {dietPlans && dietPlans.length > 0 && (
                   <div>
                     <h2 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">Your Diet Plans</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                      {dietPlans.map((plan: any, idx: number) => (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {dietPlans.map((plan: any) => (
                         <Card 
-                          key={idx} 
-                          className={`cursor-pointer transition-all ${plan._id === currentPlan?._id ? 'ring-2 ring-green-500 bg-green-50 dark:bg-green-950/30' : 'hover-elevate'}`}
-                          onClick={() => {
-                            // Allow switching between plans if user has multiple
-                            setCurrentDay('Monday');
-                            setCurrentWeek(1);
-                          }}
-                          data-testid={`card-diet-plan-${idx}`}
+                          key={plan._id}
+                          className={`cursor-pointer transition-all ${plan._id === currentPlan._id ? 'ring-2 ring-green-500 bg-green-50 dark:bg-green-950/30' : 'hover-elevate'}`}
+                          data-testid={`card-plan-${plan._id}`}
                         >
                           <CardContent className="p-4">
-                            <div className="flex items-start justify-between gap-2 mb-3">
+                            <div className="flex items-start justify-between gap-2">
                               <div className="flex-1">
-                                <h3 className="font-semibold text-gray-900 dark:text-white">{plan.name}</h3>
-                                <p className="text-xs text-muted-foreground mt-1">{plan.description || 'Custom meal plan'}</p>
+                                <h3 className="font-semibold text-sm text-gray-900 dark:text-white">{plan.name || 'Diet Plan'}</h3>
+                                <p className="text-xs text-muted-foreground mt-1">{plan.description || ''}</p>
                               </div>
-                              {plan._id === currentPlan?._id && (
-                                <Badge className="bg-green-500 whitespace-nowrap">Active</Badge>
+                              {plan._id === currentPlan._id && (
+                                <Badge className="bg-green-500 text-xs whitespace-nowrap">Active</Badge>
                               )}
                             </div>
-                            <div className="space-y-2">
-                              <div className="flex justify-between text-sm">
+                            <div className="mt-3 space-y-1 text-xs">
+                              <div className="flex justify-between">
                                 <span className="text-muted-foreground">Calories:</span>
-                                <span className="font-semibold text-gray-900 dark:text-white">{plan.targetCalories || 2000}</span>
+                                <span className="font-semibold text-gray-900 dark:text-white">{plan.targetCalories || 0}</span>
                               </div>
-                              <div className="flex justify-between text-sm">
+                              <div className="flex justify-between">
                                 <span className="text-muted-foreground">Protein:</span>
-                                <span className="font-semibold text-gray-900 dark:text-white">{plan.protein || 140}g</span>
+                                <span className="font-semibold text-gray-900 dark:text-white">{plan.protein || 0}g</span>
                               </div>
                             </div>
                           </CardContent>
@@ -426,130 +421,116 @@ export default function ClientDiet() {
                   </div>
                 )}
 
-                {/* Header with Plan Name */}
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Your Diet Plan</h1>
-                  </div>
+                {/* Your Diet Plan Header */}
+                <div className="pt-4 border-t">
+                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1">Your Diet Plan</h1>
                   <div className="flex items-center gap-2">
-                    <p className="text-muted-foreground">Personalized meal plan -</p>
-                    <Badge className="bg-orange-500">{currentPlan?.category || 'Custom'}</Badge>
+                    <p className="text-muted-foreground text-sm">Personalized meal plan -</p>
+                    <Badge className="bg-orange-500 text-xs">{currentPlan.category || 'Custom'}</Badge>
                   </div>
                 </div>
 
                 {/* Nutrition Goals */}
                 <Card>
                   <CardContent className="p-6">
-                    <h2 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Nutrition Goals</h2>
+                    <h2 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Nutrition Goals</h2>
                     <div className="grid grid-cols-4 gap-4">
                       <div className="text-center">
                         <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">
-                          {currentPlan?.targetCalories || 2000}
+                          {currentPlan.targetCalories || 2000}
                         </div>
-                        <div className="text-sm text-muted-foreground mt-2">Daily Calories</div>
+                        <div className="text-xs text-muted-foreground mt-2">Daily Calories</div>
                       </div>
                       <div className="text-center">
                         <div className="text-4xl font-bold text-red-600 dark:text-red-400">
-                          {currentPlan?.protein || 140}g
+                          {currentPlan.protein || 140}g
                         </div>
-                        <div className="text-sm text-muted-foreground mt-2">Protein</div>
+                        <div className="text-xs text-muted-foreground mt-2">Protein</div>
                       </div>
                       <div className="text-center">
                         <div className="text-4xl font-bold text-orange-600 dark:text-orange-400">
-                          {currentPlan?.carbs || 180}g
+                          {currentPlan.carbs || 180}g
                         </div>
-                        <div className="text-sm text-muted-foreground mt-2">Carbs</div>
+                        <div className="text-xs text-muted-foreground mt-2">Carbs</div>
                       </div>
                       <div className="text-center">
                         <div className="text-4xl font-bold text-green-600 dark:text-green-400">
-                          {currentPlan?.fats || 68}g
+                          {currentPlan.fats || 68}g
                         </div>
-                        <div className="text-sm text-muted-foreground mt-2">Fats</div>
+                        <div className="text-xs text-muted-foreground mt-2">Fats</div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* Weekly Meal Plan */}
+                {/* Weekly Meal Plan - Complete Rewrite */}
                 <div>
-                  <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Weekly Meal Plan</h2>
-                  {currentPlan?.meals ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <h2 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Weekly Meal Plan</h2>
+                  {currentPlan.meals && Object.keys(currentPlan.meals).length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                       {DAYS_OF_WEEK.map((day) => {
-                        // Get meals for this day - handle both object and nested structures
-                        let mealsList: any[] = [];
-                        let dayTotal = 0;
-                        
-                        const dayData = currentPlan.meals[day];
-                        
-                        if (dayData) {
-                          console.log(`[WEEKLY PLAN] ${day} data:`, dayData);
-                          
-                          // If dayData is an object with meal types (breakfast, lunch, etc)
-                          if (typeof dayData === 'object' && !Array.isArray(dayData)) {
-                            const mealTypes = Object.keys(dayData);
-                            console.log(`[WEEKLY PLAN] ${day} meal types:`, mealTypes);
-                            
-                            mealsList = mealTypes.map((mealType) => {
-                              const mealData = dayData[mealType];
-                              if (typeof mealData === 'object') {
+                        const dayMeals = currentPlan.meals[day];
+                        let mealItems: any[] = [];
+                        let dayTotalCals = 0;
+
+                        if (dayMeals && typeof dayMeals === 'object') {
+                          // dayMeals is { breakfast: {...}, lunch: {...}, etc }
+                          mealItems = Object.entries(dayMeals)
+                            .map(([mealType, mealData]: [string, any]) => {
+                              if (mealData && typeof mealData === 'object') {
+                                const cals = Number(mealData.calories) || 0;
+                                dayTotalCals += cals;
                                 return {
                                   type: mealType,
-                                  ...mealData
+                                  name: mealData.name || mealType,
+                                  time: mealData.time || '7:00 AM',
+                                  calories: cals,
+                                  protein: Number(mealData.protein) || 0,
+                                  carbs: Number(mealData.carbs) || 0,
+                                  fats: Number(mealData.fats) || 0,
+                                  dishes: mealData.dishes || []
                                 };
                               }
                               return null;
-                            }).filter(Boolean);
-                          } 
-                          // If dayData is already an array
-                          else if (Array.isArray(dayData)) {
-                            mealsList = dayData.map((meal: any) => ({
-                              type: meal.type || meal.mealType || 'Meal',
-                              ...meal
-                            }));
-                          }
-                          
-                          dayTotal = mealsList.reduce((sum: number, meal: any) => 
-                            sum + (Number(meal?.calories) || 0), 0
-                          );
-                          console.log(`[WEEKLY PLAN] ${day} total meals: ${mealsList.length}, total cal: ${dayTotal}`);
+                            })
+                            .filter(Boolean);
                         }
-                        
+
                         return (
-                          <Card key={day} className="hover-elevate">
+                          <Card key={day} className="hover-elevate overflow-hidden">
                             <CardContent className="p-4">
                               <div className="flex items-center justify-between mb-3">
-                                <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{day}</h3>
-                                <Badge className="bg-blue-500 text-xs">{dayTotal} cal</Badge>
+                                <h3 className="font-semibold text-sm text-gray-900 dark:text-white">{day}</h3>
+                                <Badge className="bg-blue-500 text-xs">{dayTotalCals} cal</Badge>
                               </div>
-                              {mealsList.length === 0 ? (
-                                <div className="text-xs text-muted-foreground text-center py-4">
-                                  No meals planned
-                                </div>
+
+                              {mealItems.length === 0 ? (
+                                <p className="text-xs text-muted-foreground text-center py-3">No meals planned</p>
                               ) : (
-                                <div className="space-y-3">
-                                  {mealsList.map((meal: any, idx: number) => (
-                                    <div key={idx} className="border-l-4 border-l-blue-500 pl-2 py-1.5">
-                                      <div className="text-xs text-muted-foreground font-medium">
-                                        {meal.time || '7:00 AM'}
-                                      </div>
-                                      <div className="font-semibold text-gray-900 dark:text-white text-xs mt-0.5">
-                                        {meal.name || meal.type || 'Meal'}
-                                      </div>
-                                      {meal.dishes && meal.dishes.length > 0 && (
-                                        <div className="text-xs text-muted-foreground mt-1">
-                                          {meal.dishes.map((d: any, i: number) => (
-                                            <div key={i}>{d.name || 'Dish'}</div>
+                                <div className="space-y-2 max-h-96 overflow-y-auto">
+                                  {mealItems.map((meal: any, idx: number) => (
+                                    <div key={idx} className="border-l-4 border-l-blue-500 pl-2 py-2 pr-2 bg-gray-50 dark:bg-gray-900/20 rounded">
+                                      <div className="text-xs text-muted-foreground font-medium">{meal.time}</div>
+                                      <div className="text-xs font-semibold text-gray-900 dark:text-white mt-0.5">{meal.name}</div>
+                                      
+                                      {meal.dishes.length > 0 && (
+                                        <div className="text-xs text-muted-foreground mt-1 space-y-0.5">
+                                          {meal.dishes.map((dish: any, di: number) => (
+                                            <div key={di} className="text-gray-600 dark:text-gray-400">
+                                              • {dish.name || 'Dish'}
+                                            </div>
                                           ))}
                                         </div>
                                       )}
-                                      <div className="text-xs text-muted-foreground mt-1 space-y-0.5">
-                                        <div>P: {Number(meal.protein) || 0}g</div>
-                                        <div>C: {Number(meal.carbs) || 0}g</div>
-                                        <div>F: {Number(meal.fats) || 0}g</div>
+
+                                      <div className="text-xs text-muted-foreground mt-1.5 space-y-0 leading-tight">
+                                        <div>P: <span className="font-semibold">{meal.protein}g</span></div>
+                                        <div>C: <span className="font-semibold">{meal.carbs}g</span></div>
+                                        <div>F: <span className="font-semibold">{meal.fats}g</span></div>
                                       </div>
-                                      <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 mt-1">
-                                        {Number(meal.calories) || 0} cal
+
+                                      <div className="text-xs font-bold text-orange-600 dark:text-orange-400 mt-1">
+                                        {meal.calories} cal
                                       </div>
                                     </div>
                                   ))}
@@ -562,8 +543,8 @@ export default function ClientDiet() {
                     </div>
                   ) : (
                     <Card>
-                      <CardContent className="p-6 text-center text-muted-foreground">
-                        No meal data available
+                      <CardContent className="p-6 text-center text-muted-foreground text-sm">
+                        No meal data available for this plan
                       </CardContent>
                     </Card>
                   )}
